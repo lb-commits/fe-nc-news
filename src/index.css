@@ -112,6 +112,18 @@
 	@apply h-8 w-8 mr-2;
 }
 
+.logo-link {
+	@apply flex items-center;
+}
+
+.site-title {
+	@apply text-secondary-foreground text-xl font-bold;
+}
+
+.actions-container {
+	@apply flex items-center space-x-4;
+}
+
 .Saiddit {
 	@apply text-secondary-foreground text-xl font-bold;
 }
@@ -137,7 +149,7 @@
 }
 
 .card {
-	@apply mb-4 p-4 bg-white dark:bg-gray-800 rounded shadow-lg dark:shadow-inverted;
+	@apply mb-4 p-4 bg-white dark:bg-gray-800 rounded shadow-lg dark:shadow-inverted block;
 }
 
 .card-title {
@@ -157,4 +169,107 @@
 		box-shadow: 0 4px 6px -1px rgba(243, 243, 243, 0.1),
 			0 2px 4px -1px rgba(248, 243, 243, 0.06);
 	}
+}
+
+.burger-button {
+	@apply p-2 bg-secondary text-secondary-foreground rounded-md;
+}
+
+.burger-icon {
+	@apply h-6 w-6;
+	fill: none;
+	stroke: currentColor;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 2;
+}
+
+.dark .burger-icon {
+	@apply text-gray-300;
+}
+
+.article-container {
+	@apply max-w-3xl mx-auto p-6 bg-white dark:bg-background rounded shadow-lg;
+}
+
+.article-title {
+	@apply text-3xl font-bold text-gray-900 dark:text-white mb-4;
+}
+
+.article-author {
+	@apply text-sm text-gray-600 dark:text-gray-400 mb-6;
+}
+
+.article-image {
+	@apply w-full h-auto mb-6 rounded;
+}
+
+.article-content {
+	@apply text-gray-800 dark:text-gray-200 leading-relaxed;
+	overflow: hidden;
+	position: relative;
+}
+
+.article-content.truncated::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 4rem;
+	background: linear-gradient(to bottom, transparent, white);
+	pointer-events: none;
+}
+
+.dark .article-content.truncated::after {
+	background: linear-gradient(to bottom, transparent, #1f2937);
+}
+
+.article-buttons {
+	@apply mt-4 flex flex-col sm:flex-row sm:justify-start sm:space-x-4 space-y-2 sm:space-y-0;
+}
+
+.expand-button,
+.comments-toggle-button {
+	@apply p-2 bg-secondary text-secondary-foreground rounded-md hover:bg-opacity-80 transition-colors;
+}
+
+.expand-button {
+	@apply w-full sm:w-auto mt-6;
+}
+
+.comments-toggle-button {
+	@apply w-full sm:w-auto;
+}
+
+.comments-container {
+	@apply mt-6;
+}
+
+.comments-title {
+	@apply text-xl font-bold mb-4;
+}
+
+.no-comments {
+	@apply text-gray-500 dark:text-gray-400;
+}
+
+.comments-list {
+	@apply space-y-4;
+}
+
+.comment-item {
+	@apply bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-4 rounded-md shadow;
+}
+
+.comment-author {
+	@apply font-semibold;
+}
+
+.comment-date {
+	@apply text-sm text-gray-500 dark:text-gray-400 mb-2;
+}
+
+.comment-body {
+	@apply text-gray-700 dark:text-gray-300;
 }

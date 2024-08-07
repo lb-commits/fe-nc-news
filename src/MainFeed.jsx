@@ -7,15 +7,20 @@ const MainFeed = () => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		getArticles()
-			.then((data) => {
+		const fetchArticles = async () => {
+			try {
+				const data = await getArticles();
 				setArticles(data.articles);
+			} catch (err) {
+				setError(
+					err.message || "An error occurred while fetching articles"
+				);
+			} finally {
 				setLoading(false);
-			})
-			.catch((err) => {
-				setError(err);
-				setLoading(false);
-			});
+			}
+		};
+
+		fetchArticles();
 	}, []);
 
 	if (loading) return <div>Loading...</div>;
