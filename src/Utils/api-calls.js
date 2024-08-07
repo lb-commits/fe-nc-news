@@ -18,3 +18,10 @@ export function getCommentsByArticleId(article_id) {
 	const route = `/articles/${article_id}/comments`;
 	return api.get(route).then((response) => response.data.comments);
 }
+
+export function updateArticleVotes(article_id, inc_votes) {
+	const route = `/articles/${article_id}`;
+	return api
+		.patch(route, { inc_votes })
+		.then((response) => response.data.article);
+}

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById, getCommentsByArticleId } from "./Utils/api-calls";
 import ArticleContent from "./ArticleContent";
-import ArticleButtons from "./ArticleButtons";
 import Comments from "./CommentsComponent";
 
 const ArticlePage = () => {
@@ -42,12 +41,14 @@ const ArticlePage = () => {
 	if (loading) return <div className="text-center mt-8">Loading...</div>;
 
 	return (
-		<div className="article-container">
+		<div className="article-page-container">
 			<ArticleContent article={article} />
-			<ArticleButtons
-				onToggleComments={handleShowComments}
-				showComments={showComments}
-			/>
+			<button
+				onClick={handleShowComments}
+				className="show-comments-button"
+			>
+				{showComments ? "Hide Comments" : "Show Comments"}
+			</button>
 			{showComments && <Comments comments={comments} />}
 		</div>
 	);

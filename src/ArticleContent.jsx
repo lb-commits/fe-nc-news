@@ -1,4 +1,5 @@
 import { useState } from "react";
+import VoteButtons from "./VoteButtons";
 
 const ArticleContent = ({ article }) => {
 	const [expanded, setExpanded] = useState(false);
@@ -8,10 +9,11 @@ const ArticleContent = ({ article }) => {
 		return text.substr(0, text.lastIndexOf(" ", maxLength)) + "...";
 	};
 
-	const truncatedText = truncateText(article.body, 200);
+	const truncatedText = truncateText(article.body, 650);
+	const isTextTruncated = article.body.length > 650;
 
 	return (
-		<>
+		<div className="article-content">
 			<h1 className="article-title">{article.title}</h1>
 			<p className="article-author">By {article.author}</p>
 			{article.article_img_url && (
@@ -21,16 +23,22 @@ const ArticleContent = ({ article }) => {
 					className="article-image"
 				/>
 			)}
-			<div className="article-content">
+			<VoteButtons
+				articleId={article.article_id}
+				initialVotes={article.votes}
+			/>
+			<div className="article-body">
 				{expanded ? article.body : truncatedText}
 			</div>
-			<button
-				onClick={() => setExpanded(!expanded)}
-				className="expand-button"
-			>
-				{expanded ? "Show Less" : "Show More"}
-			</button>
-		</>
+			{isTextTruncated && (
+				<button
+					onClick={() => setExpanded(!expanded)}
+					className="expand-button"
+				>
+					{expanded ? "Show Less" : "Show More"}
+				</button>
+			)}
+		</div>
 	);
 };
 
