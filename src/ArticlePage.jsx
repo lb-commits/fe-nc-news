@@ -38,7 +38,7 @@ const ArticlePage = () => {
 		setShowComments(!showComments);
 	};
 
-	if (loading) return <div className="text-center mt-8">Loading...</div>;
+	if (loading) return <div className="loading-indicator">Loading...</div>;
 
 	return (
 		<div className="article-page-container">
