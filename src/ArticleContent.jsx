@@ -1,5 +1,6 @@
 import { useState } from "react";
 import VoteButtons from "./VoteButtons";
+import CommentForm from "./CommentForm";
 
 const ArticleContent = ({ article }) => {
 	const [expanded, setExpanded] = useState(false);
@@ -9,8 +10,8 @@ const ArticleContent = ({ article }) => {
 		return text.substr(0, text.lastIndexOf(" ", maxLength)) + "...";
 	};
 
-	const truncatedText = truncateText(article.body, 650);
-	const isTextTruncated = article.body.length > 650;
+	const truncatedText = truncateText(article.body, 350);
+	const isTextTruncated = article.body.length > 350;
 
 	return (
 		<div className="article-content">
@@ -27,6 +28,7 @@ const ArticleContent = ({ article }) => {
 				articleId={article.article_id}
 				initialVotes={article.votes}
 			/>
+			<CommentForm articleId={article.article_id} />
 			<div className="article-body">
 				{expanded ? article.body : truncatedText}
 			</div>

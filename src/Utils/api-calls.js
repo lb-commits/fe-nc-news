@@ -25,3 +25,10 @@ export function updateArticleVotes(article_id, inc_votes) {
 		.patch(route, { inc_votes })
 		.then((response) => response.data.article);
 }
+
+export function postComment(article_id, commentData) {
+	const route = `/articles/${article_id}/comments`;
+	return api
+		.post(route, commentData)
+		.then((response) => response.data.comment);
+}
