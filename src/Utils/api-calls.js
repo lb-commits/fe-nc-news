@@ -37,3 +37,8 @@ export function deleteComment(comment_id) {
 	const route = `/comments/${comment_id}`;
 	return api.delete(route).then((response) => response.data);
 }
+
+export function getTopics() {
+	const route = "/topics";
+	return api.get(route).then((response) => response.data.topics);
+}
