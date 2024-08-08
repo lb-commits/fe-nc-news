@@ -418,3 +418,37 @@
 	justify-content: space-between;
 	align-items: start;
 }
+
+/* SortBy */
+
+.sort-by-container {
+	position: relative;
+	display: inline-block;
+}
+
+.sort-by-button {
+	padding: 10px;
+	cursor: pointer;
+}
+
+.sort-by-dropdown {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	padding: 10px;
+	z-index: 1000;
+}
+
+.sort-option {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+.sort-option button {
+	margin-left: 5px;
+	cursor: pointer;
+}

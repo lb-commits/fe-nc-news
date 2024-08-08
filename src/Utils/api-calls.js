@@ -4,9 +4,14 @@ const api = axios.create({
 	baseURL: "https://be-bc-news.onrender.com/api",
 });
 
-export function getArticles(topic = "") {
+export function getArticles(
+	topic = "",
+	sort_by = "created_at",
+	order = "desc"
+) {
 	const route = "/articles";
-	const params = topic ? { topic } : {};
+	const params = { sort_by, order };
+	if (topic) params.topic = topic;
 	return api.get(route, { params }).then((response) => response.data);
 }
 

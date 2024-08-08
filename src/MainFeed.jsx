@@ -10,9 +10,12 @@ const MainFeed = () => {
 
 	useEffect(() => {
 		const fetchArticles = async () => {
+			setLoading(true);
 			try {
 				const topic = searchParams.get("topic") || "";
-				const data = await getArticles(topic);
+				const sort_by = searchParams.get("sort_by") || "created_at";
+				const order = searchParams.get("order") || "desc";
+				const data = await getArticles(topic, sort_by, order);
 				setArticles(data.articles);
 			} catch (err) {
 				console.error(
