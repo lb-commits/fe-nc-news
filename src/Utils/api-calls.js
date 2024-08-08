@@ -4,9 +4,10 @@ const api = axios.create({
 	baseURL: "https://be-bc-news.onrender.com/api",
 });
 
-export function getArticles() {
+export function getArticles(topic = "") {
 	const route = "/articles";
-	return api.get(route).then((response) => response.data);
+	const params = topic ? { topic } : {};
+	return api.get(route, { params }).then((response) => response.data);
 }
 
 export function getArticleById(article_id) {

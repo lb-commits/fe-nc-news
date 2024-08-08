@@ -25,7 +25,7 @@ function BurgerMenuButton() {
 					<path d="M3 12h18M3 6h18M3 18h18" />
 				</svg>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="dropdown-content">
+			<DropdownMenuContent>
 				{topics.map((topic) => (
 					<DropdownMenuItem
 						key={topic.slug}

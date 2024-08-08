@@ -154,9 +154,8 @@
 }
 
 .dropdown-content {
-	@apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-lg p-2 absolute right-0 mt-2 w-56 origin-top-right z-50;
+	@apply bg-gray-800 border border-gray-700 text-white rounded shadow-lg p-2 absolute right-20 mt-0 w-56 origin-top-left z-50;
 }
-
 .dropdown-item {
 	@apply p-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-gray-900 dark:text-gray-100;
 }
@@ -173,6 +172,22 @@
 	@apply hover:bg-gray-700;
 }
 
+.dropdown-menu-content {
+	background-color: var(--dropdown-bg);
+	color: var(--dropdown-text);
+}
+
+:root {
+	--dropdown-bg: #ffffff;
+	--dropdown-text: #000000;
+	--border-color: #e5e7eb;
+}
+
+.dark {
+	--dropdown-bg: #1f2937;
+	--dropdown-text: #ffffff;
+	--border-color: #4b5563;
+}
 /* Articles */
 .article-page-container {
 	@apply max-w-3xl mx-auto p-6 bg-white dark:bg-background rounded shadow-lg;
