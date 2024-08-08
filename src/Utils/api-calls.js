@@ -4,9 +4,10 @@ const api = axios.create({
 	baseURL: "https://be-bc-news.onrender.com/api",
 });
 
-export function getArticles() {
+export function getArticles(topic = "") {
 	const route = "/articles";
-	return api.get(route).then((response) => response.data);
+	const params = topic ? { topic } : {};
+	return api.get(route, { params }).then((response) => response.data);
 }
 
 export function getArticleById(article_id) {
@@ -31,4 +32,14 @@ export function postComment(article_id, commentData) {
 	return api
 		.post(route, commentData)
 		.then((response) => response.data.comment);
+}
+
+export function deleteComment(comment_id) {
+	const route = `/comments/${comment_id}`;
+	return api.delete(route).then((response) => response.data);
+}
+
+export function getTopics() {
+	const route = "/topics";
+	return api.get(route).then((response) => response.data.topics);
 }

@@ -38,18 +38,32 @@ const ArticlePage = () => {
 		setShowComments(!showComments);
 	};
 
+	const handleAddComment = (newComment) => {
+		setComments((prevComments) => [newComment, ...prevComments]);
+		if (!showComments) {
+			setShowComments(true);
+		}
+	};
+
 	if (loading) return <div className="loading-indicator">Loading...</div>;
 
 	return (
 		<div className="article-page-container">
-			<ArticleContent article={article} />
+			<ArticleContent
+				article={article}
+				onCommentAdded={handleAddComment}
+			/>
 			<button
 				onClick={handleShowComments}
 				className="show-comments-button"
 			>
 				{showComments ? "Hide Comments" : "Show Comments"}
 			</button>
-			{showComments && <Comments comments={comments} />}
+			{showComments && (
+				<>
+					<Comments comments={comments} setComments={setComments} />
+				</>
+			)}
 		</div>
 	);
 };

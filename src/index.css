@@ -153,8 +153,40 @@
 	stroke-linejoin: round;
 }
 
+.dropdown-content {
+	@apply bg-gray-800 border border-gray-700 text-white rounded shadow-lg p-2 absolute right-20 mt-0 w-56 origin-top-left z-50;
+}
+.dropdown-item {
+	@apply p-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-gray-900 dark:text-gray-100;
+}
+
 .dark .burger-icon {
 	@apply text-gray-300;
+}
+
+.dark .dropdown-content {
+	@apply bg-gray-800 border-gray-700;
+}
+
+.dark .dropdown-item {
+	@apply hover:bg-gray-700;
+}
+
+.dropdown-menu-content {
+	background-color: var(--dropdown-bg);
+	color: var(--dropdown-text);
+}
+
+:root {
+	--dropdown-bg: #ffffff;
+	--dropdown-text: #000000;
+	--border-color: #e5e7eb;
+}
+
+.dark {
+	--dropdown-bg: #1f2937;
+	--dropdown-text: #ffffff;
+	--border-color: #4b5563;
 }
 /* Articles */
 .article-page-container {
@@ -333,4 +365,56 @@
 
 .comment-submit-button:hover {
 	background-color: hsl(var(--primary) / 0.8);
+}
+
+/* Transform Button */
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+	text-align: left;
+}
+
+.transform-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	width: 3.5rem;
+	height: 2.5rem;
+	border-radius: 0.375rem;
+	border: none;
+	background-color: transparent;
+	color: var(--foreground);
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.transform-button:hover {
+	background-color: var(--muted);
+	color: var(--muted-foreground);
+}
+
+.transform-button:active,
+.transform-button:focus {
+	background-color: var(--muted);
+	color: var(--muted-foreground);
+	outline: none;
+}
+
+.transform-button.delete-mode {
+	color: #ff0000;
+	background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* .transform-button.delete-mode:hover {
+	background-color: rgba(255, 0, 0, 0.2);
+} */
+
+.comment-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
 }

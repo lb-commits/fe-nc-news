@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { getArticles } from "./Utils/api-calls";
 import CardComponent from "./CardComponent";
 
 const MainFeed = () => {
 	const [articles, setArticles] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [searchParams] = useSearchParams();
 
 	useEffect(() => {
 		const fetchArticles = async () => {
 			try {
-				const data = await getArticles();
+				const topic = searchParams.get("topic") || "";
+				const data = await getArticles(topic);
 				setArticles(data.articles);
 			} catch (err) {
-				setError(
-					err.message || "An error occurred while fetching articles"
+				console.error(
+					"An error occurred while fetching articles:",
+					err
 				);
 			} finally {
 				setLoading(false);
@@ -21,7 +25,7 @@ const MainFeed = () => {
 		};
 
 		fetchArticles();
-	}, []);
+	}, [searchParams]);
 
 	if (loading) return <div>Loading...</div>;
 

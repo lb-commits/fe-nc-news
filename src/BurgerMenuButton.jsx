@@ -1,15 +1,60 @@
-const BurgerMenuButton = () => {
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+	DropdownMenu,
+	DropdownMenuTrigger,
+	DropdownMenuContent,
+	DropdownMenuItem,
+} from "../components/ui/dropdown-menu";
+import { getTopics } from "./Utils/api-calls";
+
+function BurgerMenuButton() {
+	const [topics, setTopics] = useState([]);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		getTopics().then(setTopics);
+	}, []);
+
+	const handleTopicSelect = (topicSlug) => {
+		if (topicSlug) {
+			navigate(`/?topic=${topicSlug}`);
+		} else {
+			navigate("/");
+		}
+	};
+
 	return (
-		<button className="burger-button">
-			<svg
-				className="burger-icon"
-				viewBox="0 0 24 24"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path d="M4 6h16M4 12h16M4 18h16" />
-			</svg>
-		</button>
+		<DropdownMenu>
+			<DropdownMenuTrigger className="burger-button">
+				<svg
+					className="burger-icon"
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+				>
+					<path d="M3 12h18M3 6h18M3 18h18" />
+				</svg>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent>
+				<DropdownMenuItem
+					key="all"
+					className="dropdown-item"
+					onClick={() => handleTopicSelect("")}
+				>
+					All Topics
+				</DropdownMenuItem>
+				{topics.map((topic) => (
+					<DropdownMenuItem
+						key={topic.slug}
+						className="dropdown-item"
+						onClick={() => handleTopicSelect(topic.slug)}
+					>
+						{topic.description}
+					</DropdownMenuItem>
+				))}
+			</DropdownMenuContent>
+		</DropdownMenu>
 	);
-};
+}
 
 export default BurgerMenuButton;
