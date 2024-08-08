@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { postComment } from "./Utils/api-calls";
 
-const CommentForm = ({ articleId }) => {
+const CommentForm = ({ articleId, onCommentAdded }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [comment, setComment] = useState("");
 
@@ -19,7 +19,10 @@ const CommentForm = ({ articleId }) => {
 		};
 
 		try {
-			await postComment(articleId, commentData);
+			const newComment = await postComment(articleId, commentData);
+			if (onCommentAdded && typeof onCommentAdded === "function") {
+				onCommentAdded(newComment);
+			}
 			setComment("");
 			setIsExpanded(false);
 		} catch (error) {

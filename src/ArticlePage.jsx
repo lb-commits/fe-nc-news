@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getArticleById, getCommentsByArticleId } from "./Utils/api-calls";
 import ArticleContent from "./ArticleContent";
 import Comments from "./CommentsComponent";
+import CommentForm from "./CommentForm";
 
 const ArticlePage = () => {
 	const { articleId } = useParams();
@@ -38,6 +39,13 @@ const ArticlePage = () => {
 		setShowComments(!showComments);
 	};
 
+	const handleAddComment = (newComment) => {
+		setComments((prevComments) => [newComment, ...prevComments]);
+		if (!showComments) {
+			setShowComments(true);
+		}
+	};
+
 	if (loading) return <div className="loading-indicator">Loading...</div>;
 
 	return (
@@ -49,7 +57,15 @@ const ArticlePage = () => {
 			>
 				{showComments ? "Hide Comments" : "Show Comments"}
 			</button>
-			{showComments && <Comments comments={comments} />}
+			{showComments && (
+				<>
+					{/* <CommentForm
+						articleId={articleId}
+						onCommentAdded={handleAddComment}
+					/> */}
+					<Comments comments={comments} setComments={setComments} />
+				</>
+			)}
 		</div>
 	);
 };

@@ -32,3 +32,8 @@ export function postComment(article_id, commentData) {
 		.post(route, commentData)
 		.then((response) => response.data.comment);
 }
+
+export function deleteComment(comment_id) {
+	const route = `/comments/${comment_id}`;
+	return api.delete(route).then((response) => response.data);
+}
