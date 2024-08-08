@@ -420,7 +420,6 @@
 }
 
 /* SortBy */
-/* SortBy Component Styles */
 .sort-by-container {
 	@apply relative flex items-center;
 }
@@ -462,4 +461,37 @@
 
 .dark .sort-option.active {
 	@apply bg-primary text-primary-foreground;
+}
+
+.sort-by-container {
+	@apply flex items-center;
+}
+
+.sort-by-button {
+	@apply p-2 bg-secondary text-secondary-foreground rounded-md hover:bg-opacity-80 transition-colors mr-2;
+}
+
+.order-toggle-button {
+	@apply p-2 bg-secondary text-secondary-foreground rounded-md hover:bg-opacity-80 transition-colors;
+}
+
+.sort-option {
+	@apply w-full text-left px-4 py-2 text-sm hover:bg-secondary hover:text-secondary-foreground transition-colors;
+}
+
+.sort-option.active {
+	@apply bg-primary text-primary-foreground;
+}
+
+.sort-by-container.disabled {
+	@apply opacity-50 cursor-not-allowed;
+}
+
+.sort-by-container.disabled .sort-by-button,
+.sort-by-container.disabled .order-toggle-button {
+	@apply pointer-events-none;
+}
+
+.dark .sort-by-container.disabled {
+	@apply opacity-30;
 }

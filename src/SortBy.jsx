@@ -7,7 +7,7 @@ import {
 	DropdownMenuItem,
 } from "../components/ui/dropdown-menu";
 
-function SortBy() {
+function SortBy({ disabled = false }) {
 	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
 
@@ -22,6 +22,7 @@ function SortBy() {
 	const currentOrder = searchParams.get("order") || "desc";
 
 	const handleSort = (sortBy) => {
+		if (disabled) return;
 		const currentTopic = searchParams.get("topic") || "";
 		const newParams = new URLSearchParams(searchParams);
 		newParams.set("sort_by", sortBy);
@@ -30,6 +31,7 @@ function SortBy() {
 	};
 
 	const toggleOrder = () => {
+		if (disabled) return;
 		const newOrder = currentOrder === "asc" ? "desc" : "asc";
 		const newParams = new URLSearchParams(searchParams);
 		newParams.set("order", newOrder);
@@ -37,9 +39,12 @@ function SortBy() {
 	};
 
 	return (
-		<div className="sort-by-container">
+		<div className={`sort-by-container ${disabled ? "disabled" : ""}`}>
 			<DropdownMenu>
-				<DropdownMenuTrigger className="sort-by-button">
+				<DropdownMenuTrigger
+					className="sort-by-button"
+					disabled={disabled}
+				>
 					Sort:{" "}
 					{sortOptions.find(
 						(option) => option.value === currentSortBy
@@ -53,13 +58,18 @@ function SortBy() {
 								currentSortBy === option.value ? "active" : ""
 							}`}
 							onClick={() => handleSort(option.value)}
+							disabled={disabled}
 						>
 							{option.label}
 						</DropdownMenuItem>
 					))}
 				</DropdownMenuContent>
 			</DropdownMenu>
-			<button onClick={toggleOrder} className="order-toggle-button">
+			<button
+				onClick={toggleOrder}
+				className="order-toggle-button"
+				disabled={disabled}
+			>
 				{currentOrder === "asc" ? "▲" : "▼"}
 			</button>
 		</div>
