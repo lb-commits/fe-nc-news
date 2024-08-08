@@ -463,20 +463,39 @@
 	@apply bg-primary text-primary-foreground;
 }
 
+.sort-by-container.disabled .sort-by-button,
+.sort-by-container.disabled .order-toggle-button {
+	@apply pointer-events-none;
+}
+
+.dark .sort-by-container.disabled {
+	@apply opacity-30;
+}
+
+/*  */
+
 .sort-by-container {
-	@apply flex items-center;
+	@apply flex items-center space-x-1;
 }
 
 .sort-by-button {
-	@apply p-2 bg-secondary text-secondary-foreground rounded-md hover:bg-opacity-80 transition-colors mr-2;
+	@apply py-1 px-2 bg-secondary text-secondary-foreground rounded-md hover:bg-opacity-80 transition-colors text-sm flex items-center;
+}
+
+.sort-label {
+	@apply mr-1 font-medium;
+}
+
+.current-sort {
+	@apply font-bold;
 }
 
 .order-toggle-button {
-	@apply p-2 bg-secondary text-secondary-foreground rounded-md hover:bg-opacity-80 transition-colors;
+	@apply p-1 bg-secondary text-secondary-foreground rounded-md hover:bg-opacity-80 transition-colors text-sm;
 }
 
 .sort-option {
-	@apply w-full text-left px-4 py-2 text-sm hover:bg-secondary hover:text-secondary-foreground transition-colors;
+	@apply w-full text-left px-3 py-1 text-sm hover:bg-secondary hover:text-secondary-foreground transition-colors;
 }
 
 .sort-option.active {

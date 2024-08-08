@@ -12,10 +12,10 @@ function SortBy({ disabled = false }) {
 	const navigate = useNavigate();
 
 	const sortOptions = [
-		{ value: "created_at", label: "Date" },
-		{ value: "votes", label: "Votes" },
-		{ value: "comment_count", label: "Comments" },
-		{ value: "title", label: "Title" },
+		{ value: "created_at", label: "Date", shortLabel: "Date" },
+		{ value: "votes", label: "Votes", shortLabel: "Votes" },
+		{ value: "comment_count", label: "Comments", shortLabel: "Com.." },
+		{ value: "title", label: "Title", shortLabel: "Title" },
 	];
 
 	const currentSortBy = searchParams.get("sort_by") || "created_at";
@@ -38,6 +38,10 @@ function SortBy({ disabled = false }) {
 		navigate(`/?${newParams.toString()}`);
 	};
 
+	const currentSortOption =
+		sortOptions.find((option) => option.value === currentSortBy) ||
+		sortOptions[0];
+
 	return (
 		<div className={`sort-by-container ${disabled ? "disabled" : ""}`}>
 			<DropdownMenu>
@@ -45,10 +49,10 @@ function SortBy({ disabled = false }) {
 					className="sort-by-button"
 					disabled={disabled}
 				>
-					Sort:{" "}
-					{sortOptions.find(
-						(option) => option.value === currentSortBy
-					)?.label || "Date"}
+					<span className="sort-label">Sort:</span>
+					<span className="current-sort">
+						{currentSortOption.shortLabel}
+					</span>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent>
 					{sortOptions.map((option) => (
