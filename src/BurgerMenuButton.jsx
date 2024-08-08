@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
 	DropdownMenu,
 	DropdownMenuTrigger,
@@ -9,10 +10,19 @@ import { getTopics } from "./Utils/api-calls";
 
 function BurgerMenuButton() {
 	const [topics, setTopics] = useState([]);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		getTopics().then(setTopics);
 	}, []);
+
+	const handleTopicSelect = (topicSlug) => {
+		if (topicSlug) {
+			navigate(`/?topic=${topicSlug}`);
+		} else {
+			navigate("/");
+		}
+	};
 
 	return (
 		<DropdownMenu>
@@ -26,10 +36,18 @@ function BurgerMenuButton() {
 				</svg>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
+				<DropdownMenuItem
+					key="all"
+					className="dropdown-item"
+					onClick={() => handleTopicSelect("")}
+				>
+					All Topics
+				</DropdownMenuItem>
 				{topics.map((topic) => (
 					<DropdownMenuItem
 						key={topic.slug}
 						className="dropdown-item"
+						onClick={() => handleTopicSelect(topic.slug)}
 					>
 						{topic.description}
 					</DropdownMenuItem>

@@ -2,7 +2,7 @@ import logo from "./Assets/logo.png";
 import DarkModeToggle from "./DarkModeToggle";
 import BurgerMenuButton from "./BurgerMenuButton";
 import { Link } from "react-router-dom";
-import TopicsAndSort from "./TopicsAndSort";
+import SortBy from "./SortBy";
 
 const Header = () => {
 	return (
@@ -17,7 +17,7 @@ const Header = () => {
 					<BurgerMenuButton />
 				</div>
 			</header>
-			<TopicsAndSort />
+			<SortBy />
 		</>
 	);
 };
