@@ -420,35 +420,46 @@
 }
 
 /* SortBy */
-
+/* SortBy Component Styles */
 .sort-by-container {
-	position: relative;
-	display: inline-block;
+	@apply relative flex items-center;
+}
+
+.sort-by-button,
+.order-toggle-button {
+	@apply p-2 cursor-pointer bg-secondary text-secondary-foreground rounded-md hover:bg-opacity-80 transition-colors;
 }
 
 .sort-by-button {
-	padding: 10px;
-	cursor: pointer;
+	@apply mr-2;
 }
 
 .sort-by-dropdown {
-	position: absolute;
-	top: 100%;
-	left: 0;
-	background-color: #fff;
-	border: 1px solid #ccc;
-	padding: 10px;
-	z-index: 1000;
+	@apply absolute top-full left-0 mt-1 bg-background border border-border rounded-md shadow-lg z-50;
 }
 
 .sort-option {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 5px;
+	@apply block w-full text-left px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-secondary-foreground transition-colors;
 }
 
-.sort-option button {
-	margin-left: 5px;
-	cursor: pointer;
+.sort-option.active {
+	@apply bg-primary text-primary-foreground;
+}
+
+/* Ensure dark mode compatibility */
+.dark .sort-by-button,
+.dark .order-toggle-button {
+	@apply bg-gray-700 text-gray-200;
+}
+
+.dark .sort-by-dropdown {
+	@apply bg-gray-800 border-gray-700;
+}
+
+.dark .sort-option {
+	@apply text-gray-200 hover:bg-gray-700;
+}
+
+.dark .sort-option.active {
+	@apply bg-primary text-primary-foreground;
 }

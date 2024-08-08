@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+	DropdownMenu,
+	DropdownMenuTrigger,
+	DropdownMenuContent,
+	DropdownMenuItem,
+} from "../components/ui/dropdown-menu";
 
 function SortBy() {
-	const [isOpen, setIsOpen] = useState(false);
 	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
 
@@ -13,49 +18,50 @@ function SortBy() {
 		{ value: "title", label: "Title" },
 	];
 
-	const handleSort = (sortBy, order) => {
+	const currentSortBy = searchParams.get("sort_by") || "created_at";
+	const currentOrder = searchParams.get("order") || "desc";
+
+	const handleSort = (sortBy) => {
 		const currentTopic = searchParams.get("topic") || "";
 		const newParams = new URLSearchParams(searchParams);
 		newParams.set("sort_by", sortBy);
-		newParams.set("order", order);
 		if (currentTopic) newParams.set("topic", currentTopic);
 		navigate(`/?${newParams.toString()}`);
-		setIsOpen(false);
+	};
+
+	const toggleOrder = () => {
+		const newOrder = currentOrder === "asc" ? "desc" : "asc";
+		const newParams = new URLSearchParams(searchParams);
+		newParams.set("order", newOrder);
+		navigate(`/?${newParams.toString()}`);
 	};
 
 	return (
 		<div className="sort-by-container">
-			<button
-				onClick={() => setIsOpen(!isOpen)}
-				className="sort-by-button"
-			>
-				Sort By ▼
-			</button>
-			{isOpen && (
-				<div className="sort-by-dropdown">
+			<DropdownMenu>
+				<DropdownMenuTrigger className="sort-by-button">
+					Sort:{" "}
+					{sortOptions.find(
+						(option) => option.value === currentSortBy
+					)?.label || "Date"}
+				</DropdownMenuTrigger>
+				<DropdownMenuContent>
 					{sortOptions.map((option) => (
-						<div key={option.value} className="sort-option">
-							<span>{option.label}</span>
-							<div>
-								<button
-									onClick={() =>
-										handleSort(option.value, "asc")
-									}
-								>
-									▲
-								</button>
-								<button
-									onClick={() =>
-										handleSort(option.value, "desc")
-									}
-								>
-									▼
-								</button>
-							</div>
-						</div>
+						<DropdownMenuItem
+							key={option.value}
+							className={`sort-option ${
+								currentSortBy === option.value ? "active" : ""
+							}`}
+							onClick={() => handleSort(option.value)}
+						>
+							{option.label}
+						</DropdownMenuItem>
 					))}
-				</div>
-			)}
+				</DropdownMenuContent>
+			</DropdownMenu>
+			<button onClick={toggleOrder} className="order-toggle-button">
+				{currentOrder === "asc" ? "▲" : "▼"}
+			</button>
 		</div>
 	);
 }
