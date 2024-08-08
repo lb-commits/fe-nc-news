@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { getArticleById, getCommentsByArticleId } from "./Utils/api-calls";
 import ArticleContent from "./ArticleContent";
 import Comments from "./CommentsComponent";
-import CommentForm from "./CommentForm";
 
 const ArticlePage = () => {
 	const { articleId } = useParams();
@@ -50,7 +49,10 @@ const ArticlePage = () => {
 
 	return (
 		<div className="article-page-container">
-			<ArticleContent article={article} />
+			<ArticleContent
+				article={article}
+				onCommentAdded={handleAddComment}
+			/>
 			<button
 				onClick={handleShowComments}
 				className="show-comments-button"
@@ -59,10 +61,6 @@ const ArticlePage = () => {
 			</button>
 			{showComments && (
 				<>
-					{/* <CommentForm
-						articleId={articleId}
-						onCommentAdded={handleAddComment}
-					/> */}
 					<Comments comments={comments} setComments={setComments} />
 				</>
 			)}

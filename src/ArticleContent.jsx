@@ -2,7 +2,7 @@ import { useState } from "react";
 import VoteButtons from "./VoteButtons";
 import CommentForm from "./CommentForm";
 
-const ArticleContent = ({ article }) => {
+const ArticleContent = ({ article, onCommentAdded }) => {
 	const [expanded, setExpanded] = useState(false);
 
 	const truncateText = (text, maxLength) => {
@@ -28,7 +28,10 @@ const ArticleContent = ({ article }) => {
 				articleId={article.article_id}
 				initialVotes={article.votes}
 			/>
-			<CommentForm articleId={article.article_id} />
+			<CommentForm
+				articleId={article.article_id}
+				onCommentAdded={onCommentAdded}
+			/>
 			<div className="article-body">
 				{expanded ? article.body : truncatedText}
 			</div>
