@@ -43,8 +43,9 @@ const ArticlePage = () => {
 				const commentsData = await getCommentsByArticleId(articleId);
 				setComments(commentsData);
 			} catch (error) {
-				console.error("Error fetching comments:", error);
-				// Optionally, you can set an error state for comments here
+				setError(
+					"An error occurred while fetching the comments. Please try again later."
+				);
 			}
 		}
 		setShowComments(!showComments);
