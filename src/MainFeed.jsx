@@ -30,7 +30,7 @@ const MainFeed = () => {
 		fetchArticles();
 	}, [searchParams]);
 
-	if (loading) return <div>Loading...</div>;
+	if (loading) return <div className="loading-indicator">Loading...</div>;
 
 	return (
 		<div className="main-feed">
