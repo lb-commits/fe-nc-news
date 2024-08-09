@@ -94,7 +94,7 @@
 }
 
 .logo {
-	@apply h-8 w-8 mr-2;
+	@apply h-8 w-8;
 }
 
 .logo-link {
@@ -103,7 +103,7 @@
 
 .site-title,
 .Saiddit {
-	@apply text-secondary-foreground text-xl font-bold;
+	@apply text-secondary-foreground font-bold text-sm mr-6;
 }
 
 .actions-container {
@@ -424,10 +424,6 @@
 .order-toggle-button {
 	@apply p-2 cursor-pointer bg-secondary text-secondary-foreground rounded-md hover:bg-opacity-80 transition-colors;
 }
-
-/* .sort-by-button {
-	@apply mr-2;
-} */
 
 .sort-by-dropdown {
 	@apply absolute top-full left-0 mt-1 bg-background border border-border rounded-md shadow-lg z-50;

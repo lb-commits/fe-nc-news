@@ -25,3 +25,5 @@ dist-ssr
 
 be_endpoints.json
 be_readme.md
+# Local Netlify folder
+.netlify
