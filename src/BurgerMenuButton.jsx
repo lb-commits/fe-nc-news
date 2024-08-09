@@ -24,6 +24,10 @@ function BurgerMenuButton() {
 		}
 	};
 
+	function capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger className="burger-button">
@@ -49,7 +53,7 @@ function BurgerMenuButton() {
 						className="dropdown-item"
 						onClick={() => handleTopicSelect(topic.slug)}
 					>
-						{topic.description}
+						{capitalizeFirstLetter(topic.slug)}
 					</DropdownMenuItem>
 				))}
 			</DropdownMenuContent>

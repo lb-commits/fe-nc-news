@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getArticleById, getCommentsByArticleId } from "./Utils/api-calls";
 import ArticleContent from "./ArticleContent";
 import Comments from "./CommentsComponent";
+import ErrorComponent from "./ErrorComponent";
 
 const ArticlePage = () => {
 	const { articleId } = useParams();
@@ -10,15 +11,25 @@ const ArticlePage = () => {
 	const [comments, setComments] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [showComments, setShowComments] = useState(false);
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const articleData = await getArticleById(articleId);
 				setArticle(articleData);
-				setLoading(false);
 			} catch (error) {
 				console.error("Error fetching article:", error);
+				if (error.message === "The requested resource was not found.") {
+					setError(
+						"Article not found. Please check the article ID and try again."
+					);
+				} else {
+					setError(
+						"An error occurred while fetching the article. Please try again later."
+					);
+				}
+			} finally {
 				setLoading(false);
 			}
 		};
@@ -32,7 +43,9 @@ const ArticlePage = () => {
 				const commentsData = await getCommentsByArticleId(articleId);
 				setComments(commentsData);
 			} catch (error) {
-				console.error("Error fetching comments:", error);
+				setError(
+					"An error occurred while fetching the comments. Please try again later."
+				);
 			}
 		}
 		setShowComments(!showComments);
@@ -46,6 +59,7 @@ const ArticlePage = () => {
 	};
 
 	if (loading) return <div className="loading-indicator">Loading...</div>;
+	if (error) return <ErrorComponent message={error} />;
 
 	return (
 		<div className="article-page-container">
